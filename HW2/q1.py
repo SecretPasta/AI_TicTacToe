@@ -6,14 +6,9 @@ class Coord:
 
 class Cell:
     def __init__(self, coord: Coord, is_safe: bool, symbol: str) -> None:
-        if coord is not None and is_safe is not None and str is not None:
-            self.coord = coord
-            self.is_safe = is_safe
-            self.symbol = symbol
-        else:
-            self.coord = coord
-            self.is_safe = False
-            self.symbol = ''
+        self.coord = coord
+        self.is_safe = is_safe
+        self.symbol = symbol
 
 
 class Grid:
