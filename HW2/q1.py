@@ -17,6 +17,9 @@ class Grid:
         for cell in inited_cells:
             self.grid[cell.coord.x][cell.coord.y] = cell
 
+    def make_move(self, cell: Cell) -> None:
+        self.grid[cell.coord.x][cell.coord.y] = cell
+
     def print_grid_debug(self) -> None:
         for row in self.grid:
             for cell in row:
@@ -29,6 +32,15 @@ class Grid:
             for cell in row:
                 print(f"| {cell.symbol} |", end=' ')
             print(f"\n-----------------")
+
+
+class Agent:
+    def __init__(self, name: str, symbol: str) -> None:
+        self.name = name
+        self.symbol = symbol
+
+    def think(self, grid: Grid) -> Cell:
+        return
 
 
 def main():
