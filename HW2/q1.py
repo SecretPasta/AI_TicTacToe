@@ -20,6 +20,16 @@ class Grid:
     def make_move(self, cell: Cell) -> None:
         self.grid[cell.coord.x][cell.coord.y] = cell
 
+    def check_grid_full(self) -> bool:
+        for row in self.grid:
+            for cell in row:
+                if not cell.is_safe:
+                    return False
+        return True
+
+    def is_over(self) -> bool:
+        return
+
     def print_grid_debug(self) -> None:
         for row in self.grid:
             for cell in row:
@@ -41,6 +51,19 @@ class Agent:
 
     def think(self, grid: Grid) -> Cell:
         return
+
+
+def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent) -> Agent:
+    
+
+    while not grid.check_grid_full():
+
+        move = player2.think(grid)
+
+
+    return
+
+
 
 
 def main():
