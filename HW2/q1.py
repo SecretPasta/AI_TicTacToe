@@ -27,7 +27,7 @@ class Grid:
                     return False
         return True
 
-    def is_over(self) -> bool:
+    def is_victory(self) -> bool:
         return
 
     def print_grid_debug(self) -> None:
@@ -55,21 +55,29 @@ class Agent:
 
 def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent) -> Agent:
     
-
+    flag = False
     while not grid.check_grid_full():
+        if flag:
+            current_player = player1
+            flag = not flag
+        else:
+            current_player = player2
+            flag = not flag
 
-        move = player2.think(grid)
+        move = current_player.think(grid)
+        grid.make_move(move)
 
+        if grid.is_victory():
+            break
 
-    return
-
-
+    return current_player
 
 
 def main():
     cells = [Cell(Coord(0, 2), True, 'X'), Cell(Coord(1, 1), True, 'X'), Cell(Coord(2, 0), True, 'O')]
     grid = Grid(cells)
     grid.print_grid()
+    winner = play_tic_tac_toe(grid, Agent("Agent X"), "X", Agent("Agent O"), "O")
 
 
 if __name__ == '__main__':
