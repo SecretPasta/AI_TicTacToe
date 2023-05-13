@@ -156,7 +156,7 @@ class Agent:
         print(f"{self.name}: {random_quip}")
 
 
-################## End of Fun Zone ################################################
+#     ################################# End of Fun Zone ################################################
 
 # Main method to play the game it gets a grid and two agents, turn decides who plays first
 # True = player1, False = player2
@@ -183,7 +183,7 @@ def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool) -> 
             print("It's a Draw!")
 
 
-# Same as the function above but with added fun to game
+# Same as the function above but with added fun to game, not part of the assignment
 def play_fun_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool) -> None:
     while not grid.game_over():
         if turn:
@@ -211,7 +211,7 @@ def play_fun_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool)
 
 def main() -> None:
     # Case A
-    cells_a = [Cell(Coord(0, 0), True, 'X'), Cell(Coord(1, 1), True, 'O'), Cell(Coord(2, 1), True, 'x')]
+    cells_a = [Cell(Coord(0, 0), True, 'X'), Cell(Coord(1, 1), True, 'O'), Cell(Coord(2, 1), True, 'X')]
     grid_a = Grid(cells_a)
     grid_a.print_grid()
     play_tic_tac_toe(grid_a, Agent("Agent X", "X"), Agent("Agent O", "O"), False)
