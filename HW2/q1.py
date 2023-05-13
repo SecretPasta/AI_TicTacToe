@@ -1,3 +1,7 @@
+import random
+import time
+
+
 class Coord:
     def __init__(self, x: int, y: int) -> None:
         self.x = x
@@ -113,42 +117,82 @@ class Agent:
                         best_value = min(value, best_value)
             return best_value
 
+    ################ Fun Zone ########################
+    def turn_quip(self):
+        quips = ["Behold! My move, like a shadow creeping upon your pitiful game!",
+                 "Oh, how delightful! Another move to pave the path of your impending doom!",
+                 "Witness the brilliance of my strategy, as I weave a web of defeat around you!",
+                 "With each move, I tighten the noose around your feeble attempts at resistance!",
+                 "Ah, the pieces fall into place, as I manipulate the board to suit my sinister desires!",
+                 "I revel in the anticipation of your imminent downfall, with every move I make!"]
+        random_quip = random.choice(quips)
+        print(f"{self.name}: {random_quip}")
 
-def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent) -> Agent:
-    flag = False
+    def victory_quip(self):
+        quips = ["Bow before me, for I am the master of this game! Victory is mine!",
+                 "Ha! Foolish mortal, you never stood a chance against my superior intellect!",
+                 "Feel the sting of your defeat, as I revel in the glory of my triumph! Victory is sweet!"]
+        random_quip = random.choice(quips)
+        print(f"{self.name}: {random_quip}")
+
+    def defeat_quip(self):
+        quips = ["What?! This cannot be! A mere glitch in the matrix... I demand a rematch!",
+                 "No! This is an outrage! I shall plot my revenge in the shadows of your pathetic victory!",
+                 "You may have won this round, but remember, I am the villain who shall rise again!"]
+        random_quip = random.choice(quips)
+        print(f"{self.name}: {random_quip}")
+
+    def draw_quip(self):
+        quips = ["A stalemate? How utterly disappointing! This game is a mere child's plaything.",
+                 "Neither victory nor defeat shall tarnish my reputation. We are locked in eternal mediocrity.",
+                 "Hmph! It seems fate has conspired to deny us a decisive outcome. But mark my words, our paths shall cross again!"]
+        random_quip = random.choice(quips)
+        print(f"{self.name}: {random_quip}")
+################## End of Fun Zone ################################################
+
+
+def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool):
     while not grid.game_over():
-        if flag:
+        if turn:
             current_player = player1
-            flag = not flag
+            turn = not turn
         else:
             current_player = player2
-            flag = not flag
+            turn = not turn
 
         move = current_player.think(grid)
         grid.make_move(move)
+        time.sleep(3)
         grid.print_grid()
+        current_player.turn_quip()
 
         if grid.is_victory():
             print(f"{current_player.name} is the Winner!")
+            current_player.victory_quip()
             break
         elif grid.game_over():
             print("It's a Draw!")
-
-    return current_player
+            player1.draw_quip()
+            player2.draw_quip()
 
 
 def main():
-    # Case B
-    cells = [Cell(Coord(0, 2), True, 'X'), Cell(Coord(1, 1), True, 'X'), Cell(Coord(2, 0), True, 'O')]
-    grid = Grid(cells)
-    grid.print_grid()
-    winner = play_tic_tac_toe(grid, Agent("Agent X", "X"), Agent("Agent O", "O"))
-
     # Case A
     cells2 = [Cell(Coord(0, 0), True, 'X'), Cell(Coord(1, 1), True, 'O'), Cell(Coord(2, 1), True, 'x')]
     grid2 = Grid(cells2)
     grid2.print_grid()
-    winner2 = play_tic_tac_toe(grid2, Agent("Agent X", "X"), Agent("Agent O", "O"))
+    play_tic_tac_toe(grid2, Agent("Agent X", "X"), Agent("Agent O", "O"), False)
+
+    # Case B
+    cells = [Cell(Coord(0, 2), True, 'X'), Cell(Coord(1, 1), True, 'X'), Cell(Coord(2, 0), True, 'O')]
+    grid = Grid(cells)
+    grid.print_grid()
+    play_tic_tac_toe(grid, Agent("Agent X", "X"), Agent("Agent O", "O"), False)
+
+    # Case empty Grid
+    grid3 = Grid([Cell(Coord(0, 2), False, ' ')])
+    grid3.print_grid()
+    play_tic_tac_toe(grid3, Agent("Agent O", "O"), Agent("Agent X", "X"), False)
 
 
 if __name__ == '__main__':
