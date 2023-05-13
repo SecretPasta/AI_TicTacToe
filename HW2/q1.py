@@ -223,7 +223,7 @@ def main() -> None:
     play_tic_tac_toe(grid_b, Agent("Agent X", "X"), Agent("Agent O", "O"), False)
 
     ################### Fun Zone - Empty Grid, Uncomment this code to run###########################
-    # This section has an empty grid with bonus Agent behaviour
+    # This section has an empty grid with bonus Agent personality
 
     # empty_grid = Grid([Cell(Coord(0, 0), False, ' ')])
     # empty_grid.print_grid()
