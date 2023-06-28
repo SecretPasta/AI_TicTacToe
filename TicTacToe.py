@@ -18,6 +18,7 @@ class Cell:
         self.symbol = symbol
 
 
+# Grid class for the player to play
 class Grid:
     # constructor
     def __init__(self, inited_cells: list[Cell]) -> None:
@@ -123,7 +124,7 @@ class Agent:
                         best_value = min(value, best_value)
             return best_value
 
-    ################ Fun Zone Methods, not part of the assignment ########################
+    ################ Quips for the Agents to say ########################
     def turn_quip(self) -> None:
         quips = ["Behold! My move, like a shadow creeping upon your pitiful game!",
                  "Oh, how delightful! Another move to pave the path of your impending doom!",
@@ -156,34 +157,10 @@ class Agent:
         print(f"{self.name}: {random_quip}")
 
 
-################## End of Fun Zone ################################################
+################## End of Quips ################################################
 
 # Main method to play the game it gets a grid and two agents, turn decides who plays first
 # True = player1, False = player2
-def play_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool) -> None:
-    # infinite loop to play until there's a winner or a draw, if statement to alternate between players
-    while not grid.game_over():
-        if turn:
-            current_player = player1
-            turn = not turn
-        else:
-            current_player = player2
-            turn = not turn
-
-        # The current player "thinks" of a move and then makes it
-        move = current_player.think(grid)
-        grid.make_move(move)
-        grid.print_grid()
-
-        # Checks if the game is over
-        if grid.is_victory():
-            print(f"{current_player.name} is the Winner!")
-            break
-        elif grid.game_over():
-            print("It's a Draw!")
-
-
-# Same as the function above but with added fun to game
 def play_fun_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool) -> None:
     while not grid.game_over():
         if turn:
@@ -210,16 +187,9 @@ def play_fun_tic_tac_toe(grid: Grid, player1: Agent, player2: Agent, turn: bool)
 
 
 def main() -> None:
-    
-
-    ################### Fun Zone - Empty Grid, Uncomment this code to run###########################
-    # This section has an empty grid with bonus Agent personality
-
-     empty_grid = Grid([Cell(Coord(0, 0), False, ' ')])
-     empty_grid.print_grid()
-     play_fun_tic_tac_toe(empty_grid, Agent("Agent X", "X"), Agent("Agent O", "O"), True)
-
-# #########################End of Fun Zone ###########################################################
+    empty_grid = Grid([Cell(Coord(0, 0), False, ' ')])
+    empty_grid.print_grid()
+    play_fun_tic_tac_toe(empty_grid, Agent("Agent X", "X"), Agent("Agent O", "O"), True)
 
 
 if __name__ == '__main__':
